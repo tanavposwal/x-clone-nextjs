@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background: #000;
+}
+
+* {
+  color: white;
+  -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+input, textarea {
+  background: transparent;
+}
+
+/* styles/loadingBar.module.css */
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #0070f3; /* Adjust color as needed */
+  z-index: 9999; /* Ensure it's above other content */
+  animation: loading 1s ease infinite; /* Add animation for visual effect */
+}
+
+@keyframes loading {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+::-webkit-scrollbar { display: none; }
