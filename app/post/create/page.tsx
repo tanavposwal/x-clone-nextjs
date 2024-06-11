@@ -1,67 +1,114 @@
 import db from "@/db/db";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import FormBtn from "@/components/buttons/FormBtn";
+import AddMedia from "@/components/AddMedia";
+import Link from "next/link";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const session = await auth();
+  let repost: any;
+
+  if (searchParams?.repost) {
+    try {
+      repost = await db.post.findUnique({
+        where: { id: searchParams.repost as string },
+        include: {
+          author: true,
+        },
+      });
+    } catch (error) {
+      notFound();
+    }
+  }
 
   async function CreatePost(formdata: FormData) {
     "use server";
 
-    await db.post.create({
-      data: {
-        content: formdata.get("post") as string,
-        authorId: session?.user?.id!,
-        image: formdata.get("url") as string
-      },
-    });
+    const content = formdata.get("post") as string;
+    const authorId = session?.user?.id!;
+    const image = formdata.get("image") as string;
+    const video = formdata.get("video") as string;
+
+    if (image != null) {
+      await db.post.create({
+        data: {
+          content,
+          authorId,
+          repost: (repost ? searchParams?.repost! as string : null),
+          image,
+        },
+      });
+    } else if (video != null) {
+      await db.post.create({
+        data: {
+          content,
+          authorId,
+          repost: (repost ? searchParams?.repost! as string : null),
+          video,
+        },
+      });
+    } else {
+      await db.post.create({
+        data: {
+          content,
+          authorId,
+          repost: (repost ? searchParams?.repost! as string : null),
+        },
+      });
+    }
 
     redirect("/");
   }
 
   return (
     <div className="px-3 mt-4">
-      <div className="pt-2 font-semibold flex gap-3 items-center">
+      <div className="pt-2 font-semibold flex items-center">
         <p>Write a post.</p>
       </div>
       <form action={CreatePost}>
+
+        {repost && (
+        <div className="mt-3 mb-4">
+            <span className="pl-2 text-xs text-neutral-400 italic">repost</span>
+            <Link href={"/post/id/" + repost.id}>
+            <div className="w-full flex flex-col border border-neutral-800 p-3 antialiased hover:bg-white/5 transition-colors rounded-2xl gap-2">
+              <div className="flex gap-2 items-center justify-start">
+                <img
+                  className="w-6 h-6 rounded-full"
+                  src={repost.author.image!}
+                  alt="profile"
+                />
+                <span
+                  className="font-bold"
+                >
+                  {repost.author.name}
+                </span>
+                <span className="text-neutral-500 text-xs">
+                  {repost.date.toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </span>
+              </div>
+                <div className="text-md">{repost.content}</div>
+            </div>
+            </Link>
+          </div>
+          )}
+
         <textarea
-          className="w-full h-32 border border-slate-600 rounded-lg mt-3 py-2 px-3 outline-none hover:border-white focus:border-white focus:ring-4 ring-white/30 transition text-lg"
+          className="w-full h-32 py-2 px-3 text-lg form-inp"
           name="post"
+          placeholder="Whats is your brain"
         ></textarea>
-        <div className="flex items-center justify-center">
-          <span className="px-2 py-1 bg-green-400 rounded-md text-black font-black mr-3">
-            #
-          </span>
-          <input
-            type="text"
-            className="w-full  border border-slate-600 rounded-lg my-3 py-2 px-3 outline-none hover:border-white focus:border-white focus:ring-4 ring-white/30 transition"
-            placeholder="hashtags"
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <span className="px-2 py-1 bg-green-400 rounded-md text-black font-black mr-3">
-            URL
-          </span>
-          <input
-            type="text"
-            className="w-full  border border-slate-600 rounded-lg my-3 py-2 px-3 outline-none hover:border-white focus:border-white focus:ring-4 ring-white/30 transition"
-            placeholder="image"
-            name="url"
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <span className="px-2 py-1 bg-green-400 rounded-md text-black font-black mr-3">
-            URL
-          </span>
-          <input
-            type="text"
-            className="w-full  border border-slate-600 rounded-lg my-3 py-2 px-3 outline-none hover:border-white focus:border-white focus:ring-4 ring-white/30 transition"
-            placeholder="video"
-            name="videourl"
-          />
-        </div>
+
+        <AddMedia />
         <FormBtn text="Post" />
       </form>
     </div>

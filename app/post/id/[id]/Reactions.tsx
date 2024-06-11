@@ -8,20 +8,34 @@ import {
   ArrowUpOnSquareIcon,
 } from "@heroicons/react/24/outline";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
 export default async function Reactions({ id }: { id: string }) {
-
   const session = await auth();
   if (session?.user == null) return "Not authenticated";
 
+  const comments = await db.comment.count({
+    where: {
+      postId: id,
+    },
+  });
+
   return (
-    <div className="py-1 w-full border-y border-slate-800 flex justify-between">
-      <button className="p-2 rounded-full hover:bg-sky-500/20 transition-colors group">
-        <ChatBubbleOvalLeftIcon className="w-5 stroke-slate-300 group-hover:stroke-sky-500 transition-colors" />
-      </button>
-      <button className="p-2 rounded-full hover:bg-green-500/20 transition-colors group">
-        <ArrowPathRoundedSquareIcon className="w-5 stroke-slate-300 group-hover:stroke-green-500 transition-colors" />
-      </button>
+    <div className="py-1 w-full flex justify-between z-10">
+      <div className="group flex items-center justify-center">
+        <button className="p-2 rounded-full group-hover:bg-sky-500/20 transition-colors group">
+          <ChatBubbleOvalLeftIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
+        </button>
+        <span className="group-hover:text-sky-500 text-sm -ml-1 font-mono">
+          {comments}
+        </span>
+      </div>
+      <Link
+        href={"/post/create?repost=" + id}
+        className="p-2 rounded-full hover:bg-green-500/20 transition-colors group"
+      >
+        <ArrowPathRoundedSquareIcon className="w-5 stroke-neutral-300 group-hover:stroke-green-500 transition-colors" />
+      </Link>
       <LikeBtn id={id} user={session?.user?.id!} />
       <UserBtn id={id} user={session?.user?.id!} />
     </div>
@@ -68,12 +82,12 @@ async function UserBtn({ id, user }: { id: string; user: string }) {
           {marked ? (
             <BookmarkIcon className="w-5 stroke-sky-500 fill-sky-500 transition-colors" />
           ) : (
-            <BookmarkIcon className="w-5 stroke-slate-300 group-hover:stroke-sky-500 transition-colors" />
+            <BookmarkIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
           )}
         </button>
       </form>
       <button className="p-2 rounded-full hover:bg-sky-500/20 transition-colors group">
-        <ArrowUpOnSquareIcon className="w-5 stroke-slate-300 group-hover:stroke-sky-500 transition-colors" />
+        <ArrowUpOnSquareIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
       </button>
     </div>
   );
@@ -106,9 +120,9 @@ async function LikeBtn({ id, user }: { id: string; user: string }) {
           className="group flex items-center justify-center"
         >
           <div className="p-2 rounded-full group-hover:bg-pink-500/20 transition-colors">
-            <HeartIcon className="w-5 stroke-pink-600 fill-pink-600 group-hover:scale-110 group-active:scale-90 transition" />
+            <HeartIcon className="w-5 stroke-pink-600 fill-pink-600 group-hover:scale-130 group-active:scale-80 transition" />
           </div>
-          <span className="text-pink-600 text-sm">{likes}</span>
+          <span className="text-pink-600 text-sm -ml-1 font-mono">{likes}</span>
         </button>
       </form>
     );
@@ -131,9 +145,11 @@ async function LikeBtn({ id, user }: { id: string; user: string }) {
     >
       <button type="submit" className="group flex items-center justify-center">
         <div className="p-2 rounded-full group-hover:bg-pink-500/20 transition-colors">
-          <HeartIcon className="w-5 stroke-slate-300 group-hover:stroke-pink-600 transition group-hover:scale-110 group-active:scale-90" />
+          <HeartIcon className="w-5 stroke-neutral-300 group-hover:stroke-pink-600 transition group-hover:scale-110 group-active:scale-90" />
         </div>
-        <span className="group-hover:text-pink-600 text-sm">{likes}</span>
+        <span className="group-hover:text-pink-600 text-sm w-fit -ml-1 font-mono">
+          {likes}
+        </span>
       </button>
     </form>
   );

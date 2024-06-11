@@ -16,9 +16,9 @@ export default async function Bookmark() {
   return (
     <div className="flex flex-col h-auto">
       {posts.map((item) => (
-        <Post post={item.post} />
+        <Post post={item.post} session={session!} key={item.id} />
       ))}
-      <div className="w-full h-24 flex items-center justify-center text-slate-500">
+      <div className="w-full h-24 flex items-center justify-center text-neutral-500">
         end of bookmark
       </div>
     </div>

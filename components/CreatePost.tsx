@@ -8,7 +8,7 @@ export default async function CreatePost() {
     <div className="">
         {session?.user && 
         <Link
-          className="bg-blue-500 py-4 px-24 rounded-full"
+          className="bg-sky-500 hover:bg-sky-600 transition-colors py-4 px-24 rounded-full text-lg font-bold"
           href={"/post/create"}
         >
           Post

@@ -14,7 +14,7 @@ export default function FollowBtn() {
           ) : (
             <div>
               <button
-                className="px-6 py-2 bg-white rounded-full text-black hover:bg-slate-300 transition font-semibold"
+                className="px-7 py-1.5 bg-white rounded-full text-black hover:bg-neutral-200 active:bg-neutral-300 transition font-semibold"
               >
                 Follow
               </button>

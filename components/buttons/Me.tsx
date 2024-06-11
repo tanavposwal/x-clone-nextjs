@@ -10,12 +10,12 @@ export default function Me() {
   return (
     <div>
       {session.data?.user ? (
-        <div className="hover:bg-white/10 transition flex rounded-full p-3 items-center gap-2">
+        <div className="hover:bg-white/10 transition flex rounded-full p-3 items-center gap-4 cursor-pointer">
           <img
             className="w-10 h-10 rounded-full"
             src={session.data?.user?.image!}
           />
-          <h1>{session.data.user.name}</h1>
+          <h1 className="text-md font-bold">{session.data.user.name}</h1>
         </div>
       ) : (
         <button

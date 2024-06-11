@@ -17,52 +17,52 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <nav className="h-screen w-72 border-slate-800 px-7 py-3 flex flex-col items-start justify-between gap-3 fixed border-r">
+    <nav className="h-screen w-72 border-neutral-800 px-7 py-3 flex flex-col items-start justify-between gap-3 fixed border-r">
       <a href="/" className="p-2 rounded-full hover:bg-white/10 transition-colors">
         <HashtagIcon className="w-9 h-9 stroke-2" />
       </a>
-      <div className="flex flex-col gap-2 items-start justify-normal w-full h-full">
+      <div className="flex flex-col items-start justify-normal w-full h-full">
         <Link
           href="/"
-          className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+          className="nav-item"
         >
           <HomeIcon className="w-7" />
           Home
         </Link>
         <Link
           href="/"
-          className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+          className="nav-item"
         >
           <MagnifyingGlassIcon className="w-7" />
           Explore
         </Link>
         <Link
           href="/"
-          className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+          className="nav-item"
         >
           <BellIcon className="w-7" />
           Notification
         </Link>
         <Link
           href="/bookmark"
-          className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+          className="nav-item"
         >
           <BookmarkIcon className="w-7" />
           Bookmark
         </Link>
         <Link
-          href="/"
-          className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+          href={`/profile/id/${session?.user?.id}`}
+          className="nav-item"
         >
           <UserIcon className="w-7" />
           Profile
         </Link>
         <Link
           href="/"
-          className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+          className="nav-item"
         >
           <Cog6ToothIcon className="w-7" />
-          Setting
+          Settings
         </Link>
 
         {session?.user && (
@@ -74,7 +74,7 @@ export default async function Navbar() {
           >
             <button
               type="submit"
-              className="hover:bg-white/10 transition rounded-full py-3 flex gap-3 items-center px-5 text-xl font-bold"
+              className="nav-item"
             >
               <ArrowLeftStartOnRectangleIcon className="w-7" />
               Logout

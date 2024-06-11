@@ -6,7 +6,7 @@ export default function Loading() {
           <div className="w-28 h-28 rounded-full bg-white/20" />
           <div className="flex">
             <div className="flex flex-1 flex-col justify-center">
-              <p className="text-2xl font-extrabold w-full bg-slate-300"></p>
+              <p className="text-2xl font-extrabold w-full bg-neutral-300"></p>
               <div className="flex flex-col gap-2">
                 <div className="text-md font-medium h-5 w-32 bg-white/20 rounded-full" />
               </div>
