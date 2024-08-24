@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 className="font-semibold text-base hover:underline flex gap-1 items-center"
               >
                 {post.author.name}
-                <CheckBadgeIcon className="w-5 h-5 fill-blue-400" />
+                {post.author.email == "tanavposwal939@gmail.com" && <CheckBadgeIcon className="w-5 h-5 fill-yellow-300" />}
               </Link>
             </div>
           </div>
