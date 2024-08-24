@@ -54,7 +54,9 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="flex flex-col my-4">
           <p className="text-xl font-extrabold flex gap-2 items-center">
             {user.name}
-            <CheckBadgeIcon className="w-5 h-5 fill-blue-400" />
+
+            {user.email == "tanavposwal939@gmail.com" && <CheckBadgeIcon className="w-5 h-5 fill-yellow-300" />}
+
           </p>
           <p className="text-md text-neutral-500">@auser</p>
         </div>

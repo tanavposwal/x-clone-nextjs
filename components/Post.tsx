@@ -38,7 +38,7 @@ export default async function Post({ post, session }: { post: any, session: Sess
             className="font-bold hover:underline flex gap-1"
           >
             {post.author.name}
-            <CheckBadgeIcon className="w-5 h-5 fill-blue-400" />
+            {post.author.email == "tanavposwal939@gmail.com" && <CheckBadgeIcon className="w-5 h-5 fill-yellow-300" />}
           </Link>
           <span className="text-neutral-500 text-xs">
             {post.date.toLocaleDateString(undefined, {

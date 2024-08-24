@@ -17,7 +17,7 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <nav className="h-screen w-72 border-neutral-800 px-7 py-3 flex flex-col items-start justify-between gap-3 fixed border-r">
+    <nav className="h-screen border-neutral-800 px-7 py-3 md:flex flex-col items-start justify-between gap-3 fixed border-r w-0 sm:w-72 hidden">
       <a href="/" className="p-2 rounded-full hover:bg-white/10 transition-colors">
         <HashtagIcon className="w-9 h-9 stroke-2" />
       </a>

@@ -23,7 +23,7 @@ export default async function Reactions({ id }: { id: string }) {
   return (
     <div className="py-1 w-full flex justify-between z-10">
       <div className="group flex items-center justify-center">
-        <button className="p-2 rounded-full group-hover:bg-sky-500/20 transition-colors group">
+        <button className="p-2 rounded-full group-hover:bg-sky-500/10 transition-colors group">
           <ChatBubbleOvalLeftIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
         </button>
         <span className="group-hover:text-sky-500 text-sm -ml-1 font-mono">
@@ -32,7 +32,7 @@ export default async function Reactions({ id }: { id: string }) {
       </div>
       <Link
         href={"/post/create?repost=" + id}
-        className="p-2 rounded-full hover:bg-green-500/20 transition-colors group"
+        className="p-2 rounded-full hover:bg-green-500/10 transition-colors group"
       >
         <ArrowPathRoundedSquareIcon className="w-5 stroke-neutral-300 group-hover:stroke-green-500 transition-colors" />
       </Link>
@@ -77,7 +77,7 @@ async function UserBtn({ id, user }: { id: string; user: string }) {
       >
         <button
           type="submit"
-          className="p-2 rounded-full hover:bg-sky-500/20 transition-colors group"
+          className="p-2 rounded-full hover:bg-sky-500/10 transition-colors group"
         >
           {marked ? (
             <BookmarkIcon className="w-5 stroke-sky-500 fill-sky-500 transition-colors" />
@@ -119,7 +119,7 @@ async function LikeBtn({ id, user }: { id: string; user: string }) {
           type="submit"
           className="group flex items-center justify-center"
         >
-          <div className="p-2 rounded-full group-hover:bg-pink-500/20 transition-colors">
+          <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
             <HeartIcon className="w-5 stroke-pink-600 fill-pink-600 group-hover:scale-130 group-active:scale-80 transition" />
           </div>
           <span className="text-pink-600 text-sm -ml-1 font-mono">{likes}</span>
@@ -144,7 +144,7 @@ async function LikeBtn({ id, user }: { id: string; user: string }) {
       }}
     >
       <button type="submit" className="group flex items-center justify-center">
-        <div className="p-2 rounded-full group-hover:bg-pink-500/20 transition-colors">
+        <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
           <HeartIcon className="w-5 stroke-neutral-300 group-hover:stroke-pink-600 transition group-hover:scale-110 group-active:scale-90" />
         </div>
         <span className="group-hover:text-pink-600 text-sm w-fit -ml-1 font-mono">
