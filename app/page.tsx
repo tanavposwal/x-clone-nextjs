@@ -5,7 +5,9 @@ import db from "@/db/db";
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const posts = await db.post.findMany({ include: { author: true } })
+  const posts = await db.post.findMany({ orderBy: {
+    date: 'desc'
+  },include: { author: true } })
   const session = await auth()
 
   return (
