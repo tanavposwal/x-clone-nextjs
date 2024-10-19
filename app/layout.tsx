@@ -24,7 +24,6 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>
         <div className="mx-auto max-w-4xl h-screen border-r flex border-neutral-800 overflow-hidden">
           <div className="">
             <Navbar />
@@ -36,7 +35,6 @@ export default async function RootLayout({
             </div>
           </div>
         </div>
-        </SessionProvider>
       </body>
     </html>
   );

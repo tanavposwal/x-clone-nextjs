@@ -1,30 +1,37 @@
-"use client";
-
+import { auth } from "@/auth";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/solid";
-import { useSession } from "next-auth/react";
-import { signIn } from "next-auth/react";
 
-export default function Me() {
-  const session = useSession();
+import { signIn } from "next-auth/react";
+import { SignIn } from "../auth/Signin";
+
+export default async function Me() {
+  const session = await auth();
 
   return (
     <div>
-      {session.data?.user ? (
+      {session?.user ? (
         <div className="hover:bg-white/10 transition flex rounded-full p-3 items-center gap-4 cursor-pointer">
           <img
             className="w-10 h-10 rounded-full"
-            src={session.data?.user?.image!}
+            src={session.user.image || "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg"}
           />
-          <h1 className="text-md font-bold">{session.data.user.name}</h1>
+          <h1 className="text-md font-bold">{session.user.name}</h1>
         </div>
       ) : (
+        <form
+            action={async () => {
+              "use server";
+              await SignIn();
+            }}
+          >
         <button
           className="px-8 py-3 hover:bg-white/10 transition w-full text-lg font-bold rounded-full items-center gap-2 flex"
-          onClick={() => signIn()}
+          type="submit"
         >
           <ArrowRightEndOnRectangleIcon className="w-8 h-8" />
           Signin
         </button>
+        </form>
       )}
     </div>
   );

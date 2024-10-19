@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import VideoElement from "@/components/VideoElement";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import Dropdown from "./Dropdown";
 import { Session } from "next-auth";
 
 export default async function Post({ post, session }: { post: any, session: Session }) {
@@ -23,15 +22,14 @@ export default async function Post({ post, session }: { post: any, session: Sess
 
   return (
     <div className="w-full flex border-b border-neutral-800 px-4 pt-3 pb-0 antialiased hover:bg-white/5 transition-colors relative">
-      {post.author.id == session?.user?.id && <Dropdown id={post.id} />}
-      <div>
+      <div className="w-11">
         <img
-          className="w-10 h-9 rounded-full bg-neutral-800"
-          src={post.author.image}
+          className="w-10 h-10 rounded-full bg-neutral-800"
+          src={post.author.image || "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg"}
           alt="profile"
         />
       </div>
-      <div className="ml-2 w-full flex flex-col">
+      <div className="ml-3 w-full flex flex-col">
         <div className="flex gap-2 items-center text-sm">
           <Link
             href={"/profile/id/" + post.author.id}

@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import Post from "@/components/Post";
 import db from "@/db/db";
+import { SessionProvider } from "next-auth/react";
 
 export const dynamic = 'force-dynamic'
 
@@ -12,9 +13,11 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col h-auto">
+      <SessionProvider>
       {posts.map(post => (
         <Post post={post} session={session!} key={post.id} />
       ))}
+      </SessionProvider>
     </div>
   );
 }
