@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeftIcon, HashtagIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function Back() {
@@ -12,7 +12,7 @@ export default function Back() {
       {pathname == "/" ? (
         <div className="w-full flex items-center justify-center relative">
           <span className="">
-            <HashtagIcon className="w-6 h-6 stroke-2" />
+            My Space
           </span>
         </div>
       ) : (

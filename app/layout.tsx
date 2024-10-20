@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import Back from "@/components/Back";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "X",
+  title: "MySpace",
   description:
-    "Opensource X clone.",
+    "Opensource micro blogging app.",
 };
 
 export default async function RootLayout({

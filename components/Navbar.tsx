@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  HashtagIcon,
+  AtSymbolIcon,
   HomeIcon,
   MagnifyingGlassIcon,
   BellIcon,
@@ -19,7 +19,7 @@ export default async function Navbar() {
   return (
     <nav className="h-screen border-neutral-800 px-7 py-3 md:flex flex-col items-start justify-between gap-3 fixed border-x w-0 sm:w-72 hidden">
       <a href="/" className="p-2 rounded-full hover:bg-white/10 transition-colors">
-        <HashtagIcon className="w-9 h-9 stroke-2" />
+        <AtSymbolIcon className="w-9 h-9 stroke-2" />
       </a>
       <div className="flex flex-col items-start justify-normal w-full h-full">
         <Link

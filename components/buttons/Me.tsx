@@ -1,8 +1,5 @@
-import { auth } from "@/auth";
+import { auth, signIn } from "@/auth";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/solid";
-
-import { signIn } from "next-auth/react";
-import { SignIn } from "../auth/Signin";
 
 export default async function Me() {
   const session = await auth();
@@ -21,7 +18,7 @@ export default async function Me() {
         <form
             action={async () => {
               "use server";
-              await SignIn();
+              await signIn();
             }}
           >
         <button
