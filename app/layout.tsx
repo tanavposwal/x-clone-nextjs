@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { auth } from "@/auth";
 import Back from "@/components/Back";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,17 +24,19 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="mx-auto max-w-4xl h-screen border-r flex border-neutral-800 overflow-hidden">
-          <div className="">
+      <SessionProvider>
+        <div className="mx-auto max-w-screen-lg h-screen border-r flex border-neutral-800 overflow-hidden">
+          <div className="w-fit">
             <Navbar />
           </div>
-          <div className="w-full sm:ml-72 overflow-y-auto">
+          <div className="w-full overflow-y-auto">
             <Back />
             <div>
               {children}
             </div>
           </div>
         </div>
+      </SessionProvider>
       </body>
     </html>
   );

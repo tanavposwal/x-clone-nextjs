@@ -1,18 +1,21 @@
-import Link from "next/link"
-import { auth } from "../auth"
+import Link from "next/link";
+import { auth } from "../auth";
+import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 
 export default async function CreatePost() {
-    const session = await auth()
+  const session = await auth();
 
-    return (
+  return (
     <div className="">
-        {session?.user && 
+      {session?.user && (
         <Link
-          className="bg-sky-500 hover:bg-sky-600 transition-colors py-4 px-24 rounded-full text-lg font-bold"
+          className="bg-blue-600 hover:bg-blue-700 transition-colors rounded-full md:py-3 p-3 flex gap-5 items-center justify-center md:pl-3 text-xl md:pr-5 group"
           href={"/post/create"}
         >
-          Post
-        </Link>}
-      </div>
-    )
+          <PaperAirplaneIcon className="w-6 group-hover:-rotate-45 transition-transform" />
+          <p className="hidden md:block">Post</p>
+        </Link>
+      )}
+    </div>
+  );
 }

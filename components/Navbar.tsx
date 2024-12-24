@@ -6,8 +6,8 @@ import {
   BellIcon,
   BookmarkIcon,
   UserIcon,
-  ArrowLeftStartOnRectangleIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
+  PowerIcon,
 } from "@heroicons/react/24/outline";
 import CreatePost from "./CreatePost";
 import Me from "./buttons/Me";
@@ -17,52 +17,37 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <nav className="h-screen border-neutral-800 px-7 py-3 md:flex flex-col items-start justify-between gap-3 fixed border-x w-0 sm:w-72 hidden">
-      <a href="/" className="p-2 rounded-full hover:bg-white/10 transition-colors">
+    <nav className="h-screen border-neutral-800 md:px-7 px-3 py-3 flex flex-col items-start justify-between gap-3 border-x md:w-72 w-fit">
+      <a
+        href="/"
+        className="p-2 rounded-full hover:bg-white/10 transition-colors"
+      >
         <AtSymbolIcon className="w-9 h-9 stroke-2" />
       </a>
-      <div className="flex flex-col items-start justify-normal w-full h-full">
-        <Link
-          href="/"
-          className="nav-item"
-        >
+      <div className="flex flex-col items-start justify-normal h-full">
+        <Link href="/" className="nav-item">
           <HomeIcon className="w-7" />
-          Home
+          <p className="hidden md:block">Home</p>
         </Link>
-        <Link
-          href="/"
-          className="nav-item"
-        >
+        <Link href="/" className="nav-item">
           <MagnifyingGlassIcon className="w-7" />
-          Explore
+          <p className="hidden md:block">Explore</p>
         </Link>
-        <Link
-          href="/"
-          className="nav-item"
-        >
+        <Link href="/" className="nav-item">
           <BellIcon className="w-7" />
-          Notification
+          <p className="hidden md:block">Notification</p>
         </Link>
-        <Link
-          href="/bookmark"
-          className="nav-item"
-        >
+        <Link href="/bookmark" className="nav-item">
           <BookmarkIcon className="w-7" />
-          Bookmark
+          <p className="hidden md:block">Bookmark</p>
         </Link>
-        <Link
-          href={`/profile/id/${session?.user?.id}`}
-          className="nav-item"
-        >
+        <Link href={`/profile/id/${session?.user?.id}`} className="nav-item">
           <UserIcon className="w-7" />
-          Profile
+          <p className="hidden md:block">Profile</p>
         </Link>
-        <Link
-          href="/"
-          className="nav-item"
-        >
+        <Link href="/" className="nav-item">
           <Cog6ToothIcon className="w-7" />
-          Settings
+          <p className="hidden md:block">Settings</p>
         </Link>
 
         {session?.user && (
@@ -72,17 +57,14 @@ export default async function Navbar() {
               await signOut();
             }}
           >
-            <button
-              type="submit"
-              className="nav-item"
-            >
-              <ArrowLeftStartOnRectangleIcon className="w-7" />
-              Logout
+            <button type="submit" className="nav-item">
+              <PowerIcon className="w-7" />
+              <p className="hidden md:block">Logout</p>
             </button>
           </form>
         )}
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 items-center justify-center">
         <CreatePost />
         <Me />
       </div>
