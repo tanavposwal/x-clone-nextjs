@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
+import LikePost from "@/components/buttons/LikePost";
 import db from "@/db/db";
 import {
   ChatBubbleOvalLeftIcon,
   ArrowPathRoundedSquareIcon,
-  HeartIcon,
   BookmarkIcon,
   ArrowUpOnSquareIcon,
 } from "@heroicons/react/24/outline";
@@ -36,7 +36,7 @@ export default async function Reactions({ id }: { id: string }) {
       >
         <ArrowPathRoundedSquareIcon className="w-5 stroke-neutral-300 group-hover:stroke-green-500 transition-colors" />
       </Link>
-      <LikeBtn id={id} user={session?.user?.id!} />
+      <LikePost id={id} user={session?.user?.id!} />
       <UserBtn id={id} user={session?.user?.id!} />
     </div>
   );
@@ -93,64 +93,64 @@ async function UserBtn({ id, user }: { id: string; user: string }) {
   );
 }
 
-async function LikeBtn({ id, user }: { id: string; user: string }) {
-  const likes = await db.like.count({ where: { postId: id } });
-  const liked = await db.like.findFirst({
-    where: { postId: id, userId: user },
-  });
+// async function LikeBtn({ id, user }: { id: string; user: string }) {
+//   const likes = await db.like.count({ where: { postId: id } });
+//   const liked = await db.like.findFirst({
+//     where: { postId: id, userId: user },
+//   });
 
-  if (liked) {
-    return (
-      <form
-        action={async () => {
-          "use server";
+//   if (liked) {
+//     return (
+//       <form
+//         action={async () => {
+//           "use server";
 
-          await db.like.deleteMany({
-            where: {
-              userId: user,
-              postId: id,
-            },
-          });
+//           await db.like.deleteMany({
+//             where: {
+//               userId: user,
+//               postId: id,
+//             },
+//           });
 
-          revalidatePath(`/post/id/${id}`);
-        }}
-      >
-        <button
-          type="submit"
-          className="group flex items-center justify-center"
-        >
-          <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
-            <HeartIcon className="w-5 stroke-pink-600 fill-pink-600 group-hover:scale-130 group-active:scale-80 transition" />
-          </div>
-          <span className="text-pink-600 text-sm -ml-1 font-mono">{likes}</span>
-        </button>
-      </form>
-    );
-  }
+//           revalidatePath(`/post/id/${id}`);
+//         }}
+//       >
+//         <button
+//           type="submit"
+//           className="group flex items-center justify-center"
+//         >
+//           <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
+//             <HeartIcon className="w-5 stroke-pink-600 fill-pink-600 group-hover:scale-130 group-active:scale-80 transition" />
+//           </div>
+//           <span className="text-pink-600 text-sm -ml-1 font-mono">{likes}</span>
+//         </button>
+//       </form>
+//     );
+//   }
 
-  return (
-    <form
-      action={async () => {
-        "use server";
+//   return (
+//     <form
+//       action={async () => {
+//         "use server";
 
-        await db.like.create({
-          data: {
-            userId: user,
-            postId: id,
-          },
-        });
+//         await db.like.create({
+//           data: {
+//             userId: user,
+//             postId: id,
+//           },
+//         });
 
-        revalidatePath(`/post/id/${id}`);
-      }}
-    >
-      <button type="submit" className="group flex items-center justify-center">
-        <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
-          <HeartIcon className="w-5 stroke-neutral-300 group-hover:stroke-pink-600 transition group-hover:scale-110 group-active:scale-90" />
-        </div>
-        <span className="group-hover:text-pink-600 text-sm w-fit -ml-1 font-mono">
-          {likes}
-        </span>
-      </button>
-    </form>
-  );
-}
+//         revalidatePath(`/post/id/${id}`);
+//       }}
+//     >
+//       <button type="submit" className="group flex items-center justify-center">
+//         <div className="p-2 rounded-full group-hover:bg-pink-500/10 transition-colors">
+//           <HeartIcon className="w-5 stroke-neutral-300 group-hover:stroke-pink-600 transition group-hover:scale-110 group-active:scale-90" />
+//         </div>
+//         <span className="group-hover:text-pink-600 text-sm w-fit -ml-1 font-mono">
+//           {likes}
+//         </span>
+//       </button>
+//     </form>
+//   );
+// }

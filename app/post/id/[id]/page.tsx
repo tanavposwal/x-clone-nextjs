@@ -1,9 +1,6 @@
 import { auth } from "@/auth";
 import db from "@/db/db";
-import {
-  EllipsisHorizontalIcon,
-  HashtagIcon,
-} from "@heroicons/react/24/outline";
+import { HashtagIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReplyBtn from "./ReplyBtn";
@@ -14,6 +11,7 @@ import ReactionSkeleton from "./ReactionSkeleton";
 import { revalidatePath } from "next/cache";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import Dropdown from "@/components/Dropdown";
+import ProfileImage from "@/components/auth/ProfileImage";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await auth();
@@ -56,7 +54,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <main>
       <div className="w-full border-b border-neutral-800 px-5 py-3 antialiased relative">
-      <Dropdown id={post.id} />
+        <Dropdown id={post.id} />
         <div className="flex items-center justify-between mb-3">
           <div className="flex w-full items-center justify-between">
             <div className="flex gap-2 items-center">
@@ -70,7 +68,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                 className="font-semibold text-base hover:underline flex gap-1 items-center"
               >
                 {post.author.name}
-                {post.author.email == "tanavposwal939@gmail.com" && <CheckBadgeIcon className="w-5 h-5 fill-yellow-300" />}
+                {post.author.email == "tanavposwal939@gmail.com" && (
+                  <CheckBadgeIcon className="w-5 h-5 fill-yellow-300" />
+                )}
               </Link>
             </div>
           </div>
@@ -151,14 +151,14 @@ export default async function Page({ params }: { params: { id: string } }) {
             day: "numeric",
           })}
         </div>
-        <Suspense fallback={<ReactionSkeleton />}>
-          <div className="border-y border-neutral-800">
+        <div className="border-y border-neutral-800">
+          <Suspense fallback={<ReactionSkeleton />}>
             <Reactions id={params.id} />
-          </div>
-        </Suspense>
+          </Suspense>
+        </div>
         {session?.user && (
           <div className="w-full flex border-neutral-800 pt-2 antialiased gap-3 transition-all">
-            <img src={session?.user?.image!} className="w-8 h-8 rounded-full" />
+            <ProfileImage />
             <form action={handleReply} className="flex w-full pt-1 gap-3">
               <textarea
                 className="text-lg outline-none w-full resize-y border rounded-md border-neutral-800 px-2 py-1 min-h-16 transition-all"
