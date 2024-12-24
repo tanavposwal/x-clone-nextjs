@@ -13,7 +13,8 @@ import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import Dropdown from "@/components/Dropdown";
 import ProfileImage from "@/components/auth/ProfileImage";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const session = await auth();
 
   const post = await db.post.findUnique({

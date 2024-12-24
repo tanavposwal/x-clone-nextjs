@@ -46,7 +46,7 @@ export default async function Post({ post, session }: { post: any, session: Sess
             })}
           </span>
         </div>
-        <Link href={"/post/id/" + post.id} key={post.hash}>
+        <Link href={"/p/" + post.id} key={post.hash}>
           <div className="text-md">{post.content}</div>
           {post.image && (
             <div className="w-full flex mt-2">

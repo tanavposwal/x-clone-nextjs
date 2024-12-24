@@ -5,11 +5,12 @@ import FormBtn from "@/components/buttons/FormBtn";
 import AddMedia from "@/components/AddMedia";
 import Link from "next/link";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default async function Home(
+  props: {
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const session = await auth();
   let repost: any;
 

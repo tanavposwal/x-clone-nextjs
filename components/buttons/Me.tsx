@@ -1,5 +1,3 @@
-"use cache";
-
 import { auth, signIn } from "@/auth";
 import ProfileImage from "../auth/ProfileImage";
 import { PowerIcon } from "@heroicons/react/24/outline";
