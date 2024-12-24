@@ -1,5 +1,5 @@
-import ReactionSkeleton from "@/app/post/id/[id]/ReactionSkeleton";
-import Reactions from "@/app/post/id/[id]/Reactions";
+import ReactionSkeleton from "@/app/p/[id]/ReactionSkeleton";
+import Reactions from "@/app/p/[id]/Reactions";
 import db from "@/db/db";
 import { HashtagIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
