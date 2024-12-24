@@ -39,7 +39,7 @@ export default async function Home({
         data: {
           content,
           authorId,
-          repost: (repost ? searchParams?.repost! as string : null),
+          repost: repost ? (searchParams?.repost! as string) : null,
           image,
         },
       });
@@ -48,7 +48,7 @@ export default async function Home({
         data: {
           content,
           authorId,
-          repost: (repost ? searchParams?.repost! as string : null),
+          repost: repost ? (searchParams?.repost! as string) : null,
           video,
         },
       });
@@ -57,7 +57,7 @@ export default async function Home({
         data: {
           content,
           authorId,
-          repost: (repost ? searchParams?.repost! as string : null),
+          repost: repost ? (searchParams?.repost! as string) : null,
         },
       });
     }
@@ -67,45 +67,37 @@ export default async function Home({
 
   return (
     <div className="px-3 mt-4">
-      <div className="pt-2 font-semibold flex items-center">
-        <p>Write a post.</p>
-      </div>
       <form action={CreatePost}>
-
         {repost && (
-        <div className="mt-3 mb-4">
+          <div className="mt-3 mb-4">
             <span className="pl-2 text-xs text-neutral-400 italic">repost</span>
             <Link href={"/post/id/" + repost.id}>
-            <div className="w-full flex flex-col border border-neutral-800 p-3 antialiased hover:bg-white/5 transition-colors rounded-2xl gap-2">
-              <div className="flex gap-2 items-center justify-start">
-                <img
-                  className="w-6 h-6 rounded-full"
-                  src={repost.author.image!}
-                  alt="profile"
-                />
-                <span
-                  className="font-bold"
-                >
-                  {repost.author.name}
-                </span>
-                <span className="text-neutral-500 text-xs">
-                  {repost.date.toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </span>
-              </div>
+              <div className="w-full flex flex-col border border-neutral-800 p-3 antialiased hover:bg-white/5 transition-colors rounded-2xl gap-2">
+                <div className="flex gap-2 items-center justify-start">
+                  <img
+                    className="w-6 h-6 rounded-full"
+                    src={repost.author.image!}
+                    alt="profile"
+                  />
+                  <span className="font-bold">{repost.author.name}</span>
+                  <span className="text-neutral-500 text-xs">
+                    {repost.date.toLocaleDateString(undefined, {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                </div>
                 <div className="text-md">{repost.content}</div>
-            </div>
+              </div>
             </Link>
           </div>
-          )}
+        )}
 
         <textarea
-          className="w-full h-32 py-2 px-3 text-lg form-inp"
+          className="w-full h-48 py-2 px-3 text-lg form-inp"
           name="post"
-          placeholder="Whats is your brain"
+          placeholder="What's happening?"
         ></textarea>
 
         <AddMedia />

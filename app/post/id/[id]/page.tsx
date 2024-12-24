@@ -54,7 +54,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <main>
       <div className="w-full border-b border-neutral-800 px-5 py-3 antialiased relative">
-        <Dropdown id={post.id} />
+        {post.authorId == session?.user?.id && (
+          <Dropdown id={post.id} />
+        )}
         <div className="flex items-center justify-between mb-3">
           <div className="flex w-full items-center justify-between">
             <div className="flex gap-2 items-center">
@@ -161,7 +163,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <ProfileImage />
             <form action={handleReply} className="flex w-full pt-1 gap-3">
               <textarea
-                className="text-lg outline-none w-full resize-y border rounded-md border-neutral-800 px-2 py-1 min-h-16 transition-all"
+                className="text-lg outline-none w-full resize-y px-2 min-h-16"
                 placeholder="Post your reply"
                 name="reply"
               />

@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { cache } from "react";
 
-export default async function ProfileImage({ className = "md:w-8 w-10 md:h-8 h-10 rounded-full" }: { className?: string }) {
+export default async function ProfileImage({ className = "w-10 h-10 rounded-full" }: { className?: string }) {
   const session = await auth();
 
   if (session?.user == null) return null;

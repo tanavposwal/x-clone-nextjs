@@ -17,7 +17,7 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <nav className="h-screen border-neutral-800 md:px-7 px-3 py-3 flex flex-col items-start justify-between gap-3 border-x md:w-72 w-fit">
+    <nav className="h-screen border-neutral-800 md:px-7 px-3 py-3 flex flex-col items-start justify-between gap-3 border-x w-fit">
       <a
         href="/"
         className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -64,7 +64,7 @@ export default async function Navbar() {
           </form>
         )}
       </div>
-      <div className="flex flex-col gap-5 items-center justify-center">
+      <div className="flex flex-col gap-5 w-full items-center justify-center">
         <CreatePost />
         <Me />
       </div>

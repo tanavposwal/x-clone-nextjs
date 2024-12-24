@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { fetchMark, updateMarkStatus } from "@/actions/bookmark";
-import { ArrowUpOnSquareIcon, BookmarkIcon } from "@heroicons/react/24/outline";
+import { BookmarkIcon, ShareIcon } from "@heroicons/react/24/outline";
 
 export default function BookmarkBtn({
   id,
@@ -38,9 +38,32 @@ export default function BookmarkBtn({
           <BookmarkIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
         )}
       </button>
-      <button className="p-2 rounded-full hover:bg-sky-500/20 transition-colors group">
-        <ArrowUpOnSquareIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
-      </button>
+      <ShareBtn id={id} />
     </div>
+  );
+}
+
+function ShareBtn({ id }: { id: string }) {
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Check this out!",
+          text: "Here is something interesting to share.",
+          url: window.location.origin+"/post/id/"+id,
+        });
+        console.log("Content shared successfully!");
+      } catch (error) {
+        console.error("Error sharing content:", error);
+      }
+    } else {
+      alert("Web Share API not supported in this browser.");
+    }
+  };
+
+  return (
+    <button className="p-2 rounded-full hover:bg-sky-500/10 transition-colors group" onClick={handleShare}>
+      <ShareIcon className="w-5 stroke-neutral-300 group-hover:stroke-sky-500 transition-colors" />
+    </button>
   );
 }

@@ -14,8 +14,6 @@ export default async function Home() {
   });
   const session = await auth();
 
-  await new Promise(resolve => setTimeout(resolve, 10000));
-
   return (
     <div className="flex flex-col h-auto">
       {posts.map((post) => (

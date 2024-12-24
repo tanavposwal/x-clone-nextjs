@@ -10,10 +10,8 @@ export default function Back() {
   return (
     <div className="h-14 flex items-center px-4 bg-black/75 backdrop-blur-md sticky top-0 z-20 w-full border-b border-stone-800">
       {pathname == "/" ? (
-        <div className="w-full flex items-center justify-center relative">
-          <span className="">
-            My Space
-          </span>
+        <div className="w-full flex items-center justify-center relative font-bold">
+          My Space
         </div>
       ) : (
         <button
