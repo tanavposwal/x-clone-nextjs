@@ -32,7 +32,7 @@ export default async function Post({ post, session }: { post: any, session: Sess
       <div className="ml-3 w-full flex flex-col">
         <div className="flex gap-2 items-center text-sm">
           <Link
-            href={"/profile/id/" + post.author.id}
+            href={"/u/" + post.author.id}
             className="font-bold hover:underline flex gap-1"
           >
             {post.author.name}
@@ -76,7 +76,7 @@ export default async function Post({ post, session }: { post: any, session: Sess
                     alt="profile"
                   />
                   <Link
-                    href={"/profile/id/" + repost.author.id}
+                    href={"/u/" + repost.author.id}
                     className="font-bold"
                   >
                     {repost.author.name}

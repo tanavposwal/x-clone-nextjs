@@ -41,7 +41,7 @@ export default async function Navbar() {
           <BookmarkIcon className="w-7" />
           <p className="hidden md:block">Bookmark</p>
         </Link>
-        <Link href={`/profile/id/${session?.user?.id}`} className="nav-item">
+        <Link href={`/u/${session?.user?.id}`} className="nav-item">
           <UserIcon className="w-7" />
           <p className="hidden md:block">Profile</p>
         </Link>

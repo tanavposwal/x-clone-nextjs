@@ -45,7 +45,7 @@ function CommentCard({ comment, me }: { comment: any; me: string }) {
       <div className="ml-2">
         <div className="flex gap-2 items-center text-sm">
           <Link
-            href={"/profile/id/" + comment.user.id}
+            href={"/u/" + comment.user.id}
             className="font-bold hover:underline"
           >
             {comment.user.id != me ? comment.user.name : "you"}

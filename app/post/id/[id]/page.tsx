@@ -66,7 +66,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 alt="profile"
               />
               <Link
-                href={"/profile/id/" + post.author.id}
+                href={"/u/" + post.author.id}
                 className="font-semibold text-base hover:underline flex gap-1 items-center"
               >
                 {post.author.name}
@@ -115,7 +115,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                   alt="profile"
                 />
                 <Link
-                  href={"/profile/id/" + repost.author.id}
+                  href={"/u/" + repost.author.id}
                   className="font-bold"
                 >
                   {repost.author.name}

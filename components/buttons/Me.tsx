@@ -11,7 +11,7 @@ export default async function Me() {
   return (
     <div>
       {session?.user ? (
-        <Link className="hover:bg-white/10 transition flex rounded-full md:p-3 p-0 items-center gap-4 cursor-pointer" href={"/profile/id/"+session.user.id}>
+        <Link className="hover:bg-white/10 transition flex rounded-full md:p-3 p-0 items-center gap-4 cursor-pointer" href={"/u/"+session.user.id}>
           <ProfileImage />
           <h1 className="text-md font-bold md:block hidden">{session.user.name}</h1>
         </Link>
