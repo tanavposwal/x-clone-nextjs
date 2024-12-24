@@ -21,7 +21,7 @@ export default async function Post({ post, session }: { post: any, session: Sess
   }
 
   return (
-    <div className="w-full flex border-b border-neutral-800 px-4 pt-3 pb-0 antialiased hover:bg-white/5 transition-colors relative">
+    <div className="w-full flex border-b border-neutral-800 px-4 pt-3 pb-0 antialiased hover:bg-white/5 transition-colors cursor-pointer relative">
       <div className="w-11">
         <img
           className="w-10 h-10 rounded-full bg-neutral-800"

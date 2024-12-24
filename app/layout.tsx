@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextTopLoader />
+        <NextTopLoader showSpinner={false} color="#fff" />
         <div className="mx-auto max-w-screen-lg h-screen border-r flex border-neutral-800 overflow-hidden">
           <div className="w-fit">
             <Navbar />

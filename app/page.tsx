@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import Post from "@/components/Post";
 import db from "@/db/db";
+import { resolve } from "path";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,8 @@ export default async function Home() {
     include: { author: true },
   });
   const session = await auth();
+
+  await new Promise(resolve => setTimeout(resolve, 10000));
 
   return (
     <div className="flex flex-col h-auto">
